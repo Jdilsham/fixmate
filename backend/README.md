@@ -31,7 +31,39 @@ docker compose up -d
 psql -h localhost -U fixmate -d fixmatedb
 
 #Stop the database:
-docker compose down
+docker compose down -v
 
 #Run the Backend
 mvn spring-boot:run
+
+JWT secret in application.yml
+echo -n "janithadilsham" | base64
+amFuaXRoYWRpbHNoYW0=
+
+
+
+src/main/java/com/fixmate/backend/
+│
+├── BackendApplication.java
+│
+├── entity/User.java
+│
+├── repository/UserRepository.java
+│
+├── dto/
+│   ├── SignupRequest.java
+│   ├── LoginRequest.java
+│   └── AuthResponse.java
+│
+├── service/
+│   ├── AuthService.java
+│   └── CustomUserDetailsService.java
+│
+├── config/
+│   ├── JwtUtil.java
+│   ├── JwtFilter.java
+│   └── SecurityConfig.java
+│
+└── controller/
+    ├── AuthController.java
+    └── UserController.java
