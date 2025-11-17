@@ -4,6 +4,7 @@ import com.fixmate.backend.dto.AuthResponse;
 import com.fixmate.backend.dto.LoginRequest;
 import com.fixmate.backend.dto.SignupRequest;
 import com.fixmate.backend.service.AuthService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +22,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> signup(@RequestBody SignupRequest r) {
+    public ResponseEntity<?> signup(@Valid @RequestBody SignupRequest r) {
         auth.signup(r);
         return ResponseEntity.ok("User Created");
     }

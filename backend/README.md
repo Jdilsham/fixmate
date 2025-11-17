@@ -12,7 +12,7 @@ Install these before starting:
 
 - Java 21
 - Maven
-- Docker + Docker Compose
+- Docker
 - IntelliJ IDEA (recommended)
 
 ---
@@ -24,6 +24,7 @@ All developers use the same PostgreSQL configuration.
 ### Start the database:
 
 ```bash
+#Start thhe database (Docker must be run befor this command)
 cd backend
 docker compose up -d
 
@@ -31,15 +32,13 @@ docker compose up -d
 psql -h localhost -U fixmate -d fixmatedb
 
 #Stop the database:
+docker compose down
+
+#Stop the database with volume: All previous data in database will be lost (No Issue)
 docker compose down -v
 
 #Run the Backend
 mvn spring-boot:run
-
-JWT secret in application.yml
-echo -n "janithadilsham" | base64
-amFuaXRoYWRpbHNoYW0=
-
 
 
 src/main/java/com/fixmate/backend/
