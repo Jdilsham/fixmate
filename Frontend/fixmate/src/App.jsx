@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <div className="w-screen h-[100vh] bg-gray-800  flex justify-center items-center">
+        <div className="w-screen h-[100vh] bg-gray-800">
           <Toaster position="top-center" />
           <Routes path="/">
             <Route path="/" element={<h1>Homepage</h1>} />

@@ -5,6 +5,8 @@ import { IoPersonCircleSharp } from "react-icons/io5";
 import { GiPadlock } from "react-icons/gi";
 import { toast } from "react-hot-toast";
 import Btn from "../Components/Btn";
+import TopWave from "../Components/Login & Signup pages/TopWave";
+import BottomWave from "../Components/Login & Signup pages/BottomWave";
 
 export default function LoginPage() {
   const [username, setusername] = useState("");
@@ -43,7 +45,8 @@ export default function LoginPage() {
     <div className="w-full h-full flex justify-center items-center  ">
       <div className="w-[414px] h-[680px] rounded-[15px]  flex flex-col justify-between bg-gradient-to-b from-[#A4E5EF] via-[#FCFFFF] to-[#B6E8F0]">
         {/*top wave form*/}
-        {/* <TopWave /> */}
+        <TopWave />
+        {/*login form  */}
         <div className="w-[414px] h-[680px] absolute  rounded-[15px]  flex flex-col justify-center items-center gap-10 p-10">
           <span className="text-[48px] text-[#2C566A] font-semibold ">
             Login
@@ -92,7 +95,7 @@ export default function LoginPage() {
           </div>
         </div>
         {/*bottom wave form */}
-        {/* <BottomWave /> */}
+        <BottomWave />
       </div>
     </div>
   );
