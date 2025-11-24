@@ -97,20 +97,6 @@ export default function SignupPage() {
             />
           </div>
 
-          {/* {role selection field} */}
-          <div className="w-[calc(100%-25px)] h-[40px] border-0 border-b-2 border-[#0B6B7E] flex flex-row items-center gap-2 p-2 ">
-            <span>I want to : </span>
-            <select
-              onChange={(e) => {
-                setrole(e.target.value);
-              }}
-              className="w-[calc(100%-100px)] h-[40px] flex flex-row items-center gap-2 p-2 "
-            >
-              <option value="User">Hire Services</option>
-              <option value="Facilitator">Provide Services</option>
-            </select>
-          </div>
-
           {/* {password field} */}
           <div className="w-full h-[40px] flex flex-row items-center gap-2 p-2 ">
             <GiPadlock size={30} color="#000" />
@@ -135,6 +121,24 @@ export default function SignupPage() {
               className="w-full h-[40px] border-0 border-b-2 border-[#0B6B7E] flex items-center px-3 font-regular focus:border-blue-500 focus:outline-none focus:ring-0"
               placeholder="Confirm Password"
             />
+          </div>
+
+          {/* {role selection field} */}
+          <div className="w-full h-[40px]  flex flex-row items-center gap-2 p-2 ">
+            <div className="w-[calc(30%)] h-[40px] text-[16px] flex items-center justify-center ">
+              <span>I want to : </span>
+            </div>
+            <div className="w-[calc(70%)] h-[40px] border-0 border-b-2 border-[#0B6B7E] flex items-center justify-center ">
+              <select
+                onChange={(e) => {
+                  setrole(e.target.value);
+                }}
+                className="w-[calc(100%-100px)] h-[40px] flex flex-row items-center gap-2 p-2 "
+              >
+                <option value="User">Hire Services</option>
+                <option value="Facilitator">Provide Services</option>
+              </select>
+            </div>
           </div>
 
           <Btn
