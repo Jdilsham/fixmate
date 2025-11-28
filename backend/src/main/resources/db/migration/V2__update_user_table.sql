@@ -1,0 +1,40 @@
+ALTER TABLE users
+    ADD banned BOOLEAN;
+
+ALTER TABLE users
+    ADD first_name VARCHAR(255);
+
+ALTER TABLE users
+    ADD last_name VARCHAR(255);
+
+ALTER TABLE users
+    ALTER COLUMN banned SET NOT NULL;
+
+ALTER TABLE users
+    ALTER COLUMN first_name SET NOT NULL;
+
+ALTER TABLE users
+    ALTER COLUMN last_name SET NOT NULL;
+
+ALTER TABLE users
+DROP
+COLUMN firstname;
+
+ALTER TABLE users
+DROP
+COLUMN lastname;
+
+ALTER TABLE users
+    ALTER COLUMN created_at SET NOT NULL;
+
+ALTER TABLE users
+ALTER
+COLUMN email TYPE VARCHAR(255) USING (email::VARCHAR(255));
+
+ALTER TABLE users
+ALTER
+COLUMN phone TYPE VARCHAR(255) USING (phone::VARCHAR(255));
+
+ALTER TABLE users
+ALTER
+COLUMN role TYPE VARCHAR(255) USING (role::VARCHAR(255));
