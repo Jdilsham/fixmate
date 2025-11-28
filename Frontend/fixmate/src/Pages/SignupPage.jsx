@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import TopWave from "../Components/Login & Signup pages/TopWave";
-import BottomWave from "../Components/Login & Signup pages/BottomWave";
+import TopWave from "../Components/Login & Signup/TopWave";
+import BottomWave from "../Components/Login & Signup/BottomWave";
 import { IoPersonCircleSharp } from "react-icons/io5";
 import { MdAttachEmail } from "react-icons/md";
 import { GiPadlock } from "react-icons/gi";
@@ -10,11 +10,12 @@ import { toast } from "react-hot-toast";
 import Btn from "../Components/Btn";
 
 export default function SignupPage() {
-  const [firstname, setfirstname] = useState("");
-  const [lastname, setlastname] = useState("");
+  const [firstName, setfirstName] = useState("");
+  const [lastName, setlastName] = useState("");
   const [email, setemail] = useState("");
-  const [phonenumber, setphonenumber] = useState("");
-  const [role, setrole] = useState("");
+  const [phone, setphone] = useState("");
+  const [role, setrole] = useState("User");
+
   const [password, setpassword] = useState("");
   const [confirmpassword, setconfirmpassword] = useState("");
   const navigate = useNavigate();
@@ -24,12 +25,12 @@ export default function SignupPage() {
       const response = await axios.post(
         "http://localhost:8081/api/auth/signup",
         {
-          firstname: firstname,
-          lastname: lastname,
+          firstName: firstName,
+          lastName: lastName,
           email: email,
-          phonenumber: phonenumber,
-          role: role,
+          phone: phone,
           password: password,
+          role: role,
         }
       );
       console.log("Signup successful:", response.data);
@@ -37,7 +38,23 @@ export default function SignupPage() {
       navigate("/login");
     } catch (error) {
       console.error("Signup failed:", error);
-      toast.error("Signup failed. Please try again.");
+      if (error.response?.data) {
+        const errors = error.response.data;
+
+        // If backend sent field errors (object)
+        if (typeof errors === "object" && !Array.isArray(errors)) {
+          const firstError = Object.values(errors)[0]; // get first message
+          toast.error(firstError);
+          return;
+        }
+
+        // If backend sends a normal error message
+        if (errors.message) {
+          toast.error(errors.message);
+          return;
+        }
+      }
+      toast.error(`Signup failed. please try again.`);
     }
   }
   return (
@@ -45,9 +62,10 @@ export default function SignupPage() {
       <div className="w-[480px] h-[780px] rounded-[15px] flex flex-col justify-between bg-gradient-to-b from-[#A4E5EF] via-[#FCFFFF] to-[#B6E8F0]">
         {/*top wave form*/}
         <TopWave />
-        <div className="w-[480px] h-[780px] absolute  rounded-[15px]  flex flex-col justify-center items-center gap-10 p-10">
+
+        <div className="w-[480px] h-[780px] absolute  rounded-[15px]  flex flex-col justify-center items-center gap-7 p-10">
           <span className="text-[48px] text-[#2C566A] font-semibold ">
-            Sign in
+            Sign up
           </span>
 
           {/* {name fields} */}
@@ -55,7 +73,7 @@ export default function SignupPage() {
             <IoPersonCircleSharp size={30} color="#000" />
             <input
               onChange={(e) => {
-                setfirstname(e.target.value);
+                setfirstName(e.target.value);
               }}
               type="text"
               className="w-[calc(48%)] h-[40px]  border-[#0B6B7E] flex items-center px-3 font-regular border-0 border-b-2 focus:border-blue-500 focus:outline-none focus:ring-0 "
@@ -63,7 +81,7 @@ export default function SignupPage() {
             />
             <input
               onChange={(e) => {
-                setlastname(e.target.value);
+                setlastName(e.target.value);
               }}
               type="text"
               className="w-[calc(48%)] h-[40px]  border-[#0B6B7E] flex items-center px-3 font-regular border-0 border-b-2 focus:border-blue-500 focus:outline-none focus:ring-0 "
@@ -89,26 +107,12 @@ export default function SignupPage() {
             <MdAttachEmail size={30} color="#000" />
             <input
               onChange={(e) => {
-                setphonenumber(e.target.value);
+                setphone(e.target.value);
               }}
               type="tel"
               className="w-full h-[40px] border-0 border-b-2 border-[#0B6B7E] flex items-center px-3 font-regular focus:border-blue-500 focus:outline-none focus:ring-0 "
               placeholder={"Phone Number"}
             />
-          </div>
-
-          {/* {role selection field} */}
-          <div className="w-[calc(100%-25px)] h-[40px] border-0 border-b-2 border-[#0B6B7E] flex flex-row items-center gap-2 p-2 ">
-            <span>I want to : </span>
-            <select
-              onChange={(e) => {
-                setrole(e.target.value);
-              }}
-              className="w-[calc(100%-100px)] h-[40px] flex flex-row items-center gap-2 p-2 "
-            >
-              <option value="User">Hire Services</option>
-              <option value="Facilitator">Provide Services</option>
-            </select>
           </div>
 
           {/* {password field} */}
@@ -135,6 +139,27 @@ export default function SignupPage() {
               className="w-full h-[40px] border-0 border-b-2 border-[#0B6B7E] flex items-center px-3 font-regular focus:border-blue-500 focus:outline-none focus:ring-0"
               placeholder="Confirm Password"
             />
+          </div>
+
+          {/* {role selection field} */}
+          <div className="w-full h-[40px]  flex flex-row items-center gap-2 p-2 ">
+            <div className="w-[calc(30%)] h-[40px] text-[16px] flex items-center justify-center ">
+              <span>I want to : </span>
+            </div>
+            <div className="w-[calc(70%)] h-[40px] border-0 border-b-2 border-[#0B6B7E] flex items-center justify-center ">
+              <select
+                onChange={(e) => {
+                  setrole(e.target.value);
+                }}
+                className="w-[calc(100%-100px)] h-[40px] flex flex-row items-center gap-2 p-2 "
+              >
+                <option value="" hidden defaultChecked>
+                  Select an option
+                </option>
+                <option value="User">Hire Services</option>
+                <option value="Facilitator">Provide Services</option>
+              </select>
+            </div>
           </div>
 
           <Btn
