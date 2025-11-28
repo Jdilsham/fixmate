@@ -48,6 +48,13 @@ public class AuthService {
 
     public String login(LoginRequest r){
 
+        repo.findByEmail(r.getEmail()).ifPresent(user -> {
+            if (user.isBanned()) {
+                throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Your account has been banned.");
+            }
+        });
+
+
         authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         r.getEmail(),
