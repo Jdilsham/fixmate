@@ -3,7 +3,7 @@
 ## Tech Stack
 - Spring Boot (Backend)
 - React + Vite (Frontend)
-- MySQL (Database)
+- PostgreSQL (Database)
 - Docker + GitHub Actions (DevOps)
 - Flutter (Mobile — later)
 
